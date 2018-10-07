@@ -3,7 +3,7 @@ package arboleos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node<T> {
+public class Node<T> implements SearchMethods<T> {
 
     private T data = null;
     private List<Node<T>> children = new ArrayList<>();
@@ -41,27 +41,6 @@ public class Node<T> {
         return this.getChildren().get(n);
     }
 
-    //Metodos de búsqueda
-    //Busca desde el nodo usado como raiz
-    /*
-    public Node<T> depthSearch(T data){
-
-        if(this.getData().equals(data)){
-            return this;
-        }else{
-            if (!this.getChildren().isEmpty()) {
-                for (Node<T> c : this.children) {
-                    if (c.getData().equals(data)) {
-                        return c;
-                    } else {
-                        c.depthSearch(data);
-                    }
-                }
-            }
-        }
-        return this;
-    }
-    */
     public SearchRoute<T> depthSearch(T data) {
         Node<T> copy = new Node<>(this);
         //ArrayList<Node<T>> l = new ArrayList<>(copy.getChildren());
@@ -87,7 +66,7 @@ public class Node<T> {
     }
 
 
-    public SearchRoute<T> broadSearch(T data) {
+    public SearchRoute<T> breadthSearch(T data) {
         Node<T> copy = new Node<>(this);
         ArrayList<Node<T>> l = new ArrayList<>();
         ArrayList<Node<T>> v = new ArrayList<>();

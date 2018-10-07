@@ -1,3 +1,4 @@
+import arboleos.BinaryNode;
 import arboleos.Node;
 import arboleos.SearchRoute;
 import org.junit.jupiter.api.Assertions;
@@ -70,8 +71,16 @@ public class TestNode {
 
         Assertions.assertEquals(raiz.getNChild(1).getNChild(1), raiz.depthSearch(17).getNode());
 
-        raiz.broadSearch(17).getRoute().forEach(System.out::println);
+        raiz.breadthSearch(17).getRoute().forEach(System.out::println);
     }
 
+    @Test
+    public void binarios() {
+        BinaryNode<Double> raiz = new BinaryNode<>(5d);
+        raiz.addData(1d);
+        raiz.addData(2d);
+        raiz.addData(6d);
+        System.out.println(raiz.toString());
+    }
 
 }
