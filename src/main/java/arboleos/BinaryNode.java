@@ -1,67 +1,66 @@
 package arboleos;
 
-public class BinaryNode<T> implements SearchMethods<T> {
 
-    private T data = null;
-    private BinaryNode<T> leftChild = null;
-    private BinaryNode<T> rigthChild = null;
-    private BinaryNode<T> parent = null;
+public class BinaryNode<T> {
+    /*
+        public class BinaryTree {
+            BinaryNode root;
+        }
+    */
+    private Double value;
+    private BinaryNode left;
+    private BinaryNode right;
     private Integer level = 0;
+    private BinaryNode parent;
 
-    public BinaryNode(T data) {
-        this.data = data;
+    BinaryNode(Double value) {
+        this.value = value;
+        this.right = null;
+        this.left = null;
     }
 
-    public BinaryNode(BinaryNode<T> another) {
-        this.data = another.data;
-        this.leftChild = another.leftChild;
-        this.rigthChild = another.rigthChild;
-        this.parent = another.parent;
-        this.level = another.level;
+    BinaryNode(Double value, BinaryNode parent) {
+        this.value = value;
+        this.right = null;
+        this.left = null;
+        this.parent = parent;
     }
 
-    public BinaryNode() {
+    BinaryNode() {
+        this.value = null;
+        this.right = null;
+        this.left = null;
         this.level = -1;
     }
 
-
-    public BinaryNode<T> addChild(BinaryNode<T> child, BinaryNode<T> p) {
-        child.setParent(p);
-        p.setLeftChild(child);
-        child.setLevel(p.getLevel() + 1);
-        return child;
+    public Double getValue() {
+        return value;
     }
 
-    public void addData(T data) {
-        if ((Double) data <= (Double) this.data) {
-            if (this.leftChild == null) {
-                this.setLeftChild(new BinaryNode<>(data));
-            } else {
-                this.leftChild.addData(data);
-            }
-        } else {
-            if (this.rigthChild == null) {
-                this.setRigthChild(new BinaryNode<>(data));
-            } else {
-                this.rigthChild.addData(data);
-            }
-        }
+    public void setValue(Double value) {
+        this.value = value;
     }
 
-    public T getData() {
-        return data;
+    public BinaryNode getLeft() {
+        return left;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public BinaryNode setLeft(BinaryNode left) {
+        this.left = left;
+        this.left.parent = this;
+        this.left.level = this.level + 1;
+        return this.left;
     }
 
-    public BinaryNode<T> getParent() {
-        return parent;
+    public BinaryNode getRight() {
+        return right;
     }
 
-    public void setParent(BinaryNode<T> parent) {
-        this.parent = parent;
+    public BinaryNode setRight(BinaryNode right) {
+        this.right = right;
+        this.right.parent = this;
+        this.right.level = this.level + 1;
+        return this.right;
     }
 
     public Integer getLevel() {
@@ -72,39 +71,39 @@ public class BinaryNode<T> implements SearchMethods<T> {
         this.level = level;
     }
 
-    public BinaryNode<T> getLeftChild() {
-        return leftChild;
+    public BinaryNode getParent() {
+        return parent;
     }
 
-    public void setLeftChild(BinaryNode<T> leftChild) {
-        this.leftChild = leftChild;
-    }
-
-    public BinaryNode<T> getRigthChild() {
-        return rigthChild;
-    }
-
-    public void setRigthChild(BinaryNode<T> rigthChild) {
-        this.rigthChild = rigthChild;
-    }
-
-    @Override
-    public SearchRoute<T> depthSearch(T data) {
-        return null;
-    }
-
-    @Override
-    public SearchRoute<T> breadthSearch(T data) {
-        return null;
+    public void setParent(BinaryNode parent) {
+        this.parent = parent;
     }
 
     @Override
     public String toString() {
-        return "BinaryNode{" +
-                "data=" + data +
+        String p = parent == null ? "null" : String.valueOf(parent.getValue());
+        return "{" +
+                "value=" + value +
+                ", parent=" + p +
                 ", level=" + level +
-                ", leftChild=" + leftChild +
-                ", rigthChild=" + rigthChild +
-                '}';
+                ", left=" + left +
+                ", right=" + right +
+                "}";
     }
+
+    public String showTree() {
+        return String.format("{%s, %s %s}", value.toString(), left == null ? "null" : left.showTree()
+                , right == null ? "null" : right.showTree());
+    }
+
+    public String niceShowTree() {
+        return String.format("{%s, %s %s}", value.toString(), left == null ? "" : left.niceShowTree()
+                , right == null ? "" : right.niceShowTree());
+    }
+
+    public String nicerShowTree() {
+        return String.format("%s %s %s", left == null ? "" : left.nicerShowTree()
+                , value.toString(), right == null ? "" : right.nicerShowTree());
+    }
+
 }

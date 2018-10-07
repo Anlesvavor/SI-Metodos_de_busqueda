@@ -1,4 +1,4 @@
-import arboleos.BinaryNode;
+import arboleos.BinaryTree;
 import arboleos.Node;
 import arboleos.SearchRoute;
 import org.junit.jupiter.api.Assertions;
@@ -76,11 +76,29 @@ public class TestNode {
 
     @Test
     public void binarios() {
-        BinaryNode<Double> raiz = new BinaryNode<>(5d);
-        raiz.addData(1d);
-        raiz.addData(2d);
-        raiz.addData(6d);
-        System.out.println(raiz.toString());
+        BinaryTree arbol = new BinaryTree();
+
+        arbol.add(5d);
+        arbol.add(3d);
+        arbol.add(7d);
+        arbol.add(8d);
+        arbol.add(1d);
+        arbol.add(4d);
+        arbol.add(10d);
+        arbol.add(11d);
+        arbol.add(2d);
+        arbol.add(3d);
+        arbol.add(9d);
+        arbol.add(22d);
+        arbol.add(2d);
+        arbol.add(3d);
+
+        System.out.println(arbol.containsNode(5d).toString());
+        System.out.println(arbol.containsNode(5d).niceShowTree());
+        System.out.println(arbol.containsNode(5d).nicerShowTree());
+
+        //System.out.println(arbol.containsNode(5d).niceShowTree());
+        System.out.println(arbol.getMaxLevel());
     }
 
 }
