@@ -1,8 +1,12 @@
 package arboleos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinaryTree {
-    BinaryNode root;
-    Integer maxLevel = 0;
+    private BinaryNode root;
+    private Integer maxLevel = 0;
+    private List<BinaryNode> nodeList = new ArrayList<>();
 
     private BinaryNode addRecursive(BinaryNode current, Double value) {
         if (current == null) {
@@ -18,7 +22,6 @@ public class BinaryTree {
             // value already exists
             return current;
         }
-
         return current;
     }
 
@@ -27,6 +30,7 @@ public class BinaryTree {
     }
 
     private BinaryNode containsNodeRecursive(BinaryNode actual, Double value) {
+        nodeList.add(actual);
         if (actual == null) {
             return new BinaryNode();
         }
@@ -47,6 +51,22 @@ public class BinaryTree {
 
     public void setMaxLevel(Integer maxLevel) {
         this.maxLevel = maxLevel;
+    }
+
+    public BinaryNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(BinaryNode root) {
+        this.root = root;
+    }
+
+    public List<BinaryNode> getNodeList() {
+        return nodeList;
+    }
+
+    public void setNodeList(List<BinaryNode> nodeList) {
+        this.nodeList = nodeList;
     }
 
     @Override

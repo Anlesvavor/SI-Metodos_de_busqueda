@@ -120,22 +120,38 @@ public class Node<T> implements SearchMethods<T> {
         this.level = level;
     }
 
+    public static String tabs(Integer n) {
+        String tabs = "";
+        for (Integer i = 0; i < n; i++)
+            tabs = String.format("%s\t", tabs);
+        return tabs;
+    }
+
     //@Override
     public String toStringNice() {
         return "Node{" +
-                "\n\tlevel=" + level +
-                "\n\tdata=" + data +
-                "\n\tchildren=\n\t" + children +
+                " level=" + level +
+                " data=" + data +
+                " children=\n" + children +
                 '}';
 
     }
 
+    /*
+    tan bonita y no pude usarte </3
+        ()->{
+                    String tabs = "";
+                    for (Integer i = 0; i < level; i++)
+                        tabs = String.format("%s\t", tabs)
+                    return tabs;
+                }
+     */
+    //My proudest toString()'s Override
     @Override
     public String toString() {
-        return "Node{" +
-                "level=" + level +
-                ", data=" + data +
-                ", children=" + children +
-                '}';
+        return String.format("%sNode{level=%s, data=%s%s}\n",
+                tabs(level),
+                level.toString(), data.toString(),
+                children.isEmpty() ? "" : String.format(", children=\n%s", children.toString()));
     }
 }

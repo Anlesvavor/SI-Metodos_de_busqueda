@@ -97,13 +97,33 @@ public class BinaryNode<T> {
     }
 
     public String niceShowTree() {
-        return String.format("{%s, %s %s}", value.toString(), left == null ? "" : left.niceShowTree()
-                , right == null ? "" : right.niceShowTree());
+        return String.format("%sNode{level=%s, value=%s%s%s}",
+                Node.tabs(level),
+                level.toString(), value.toString(),
+                left == null ? "" : String.format(" , \n" + Node.tabs(level + 1) + "left=%s", left.niceShowTree()),
+                right == null ? "" : String.format(", \n" + Node.tabs(level + 1) + "rigth=%s", right.niceShowTree()));
+
     }
 
-    public String nicerShowTree() {
-        return String.format("%s %s %s", left == null ? "" : left.nicerShowTree()
-                , value.toString(), right == null ? "" : right.nicerShowTree());
+    public String showOrdered() {
+        return String.format("%s %s %s", left == null ? "" : left.showOrdered()
+                , value.toString(), right == null ? "" : right.showOrdered());
     }
 
+    public String showOrderedReverse() {
+        return String.format("%s %s %s", right == null ? "" : right.showOrderedReverse()
+                , value.toString(), left == null ? "" : left.showOrderedReverse());
+    }
+
+/*
+    public ArrayList<T> route (BinaryNode node){
+        List<BinaryNode> l = new ArrayList<>();
+        if(node.getParent()!=null){
+            l.add(route(node.getParent()));
+        } else {
+            return this;
+        }
+        return this;
+    }
+*/
 }
