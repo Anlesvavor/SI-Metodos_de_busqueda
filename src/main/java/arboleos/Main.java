@@ -43,7 +43,7 @@ public class Main {
 
     public static BinaryTree generateRandomBinaryTree() {
         BinaryTree tree = new BinaryTree();
-        for (Integer i = 0; i < Math.ceil(Math.random() * 20); i++)
+        for (Integer i = 0; i < Math.ceil(Math.random() * 20) + 8; i++)
             tree.add(Math.ceil(Math.random() * 50));
         return tree;
     }

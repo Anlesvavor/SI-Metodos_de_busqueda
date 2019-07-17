@@ -1,0 +1,136 @@
+package arboleos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BinaryNode<T> implements SearchMethods<T> {
+
+    private T data = null;
+    private BinaryNode<T> leftChild = null;
+    private BinaryNode<T> rigthChild = null;
+    private BinaryNode<T> parent = null;
+    private Integer level = 0;
+    private List<BinaryNode<T>> route = new ArrayList<>();
+
+    public BinaryNode(T data) {
+        this.data = data;
+    }
+
+    public BinaryNode(BinaryNode<T> another) {
+        this.data = another.data;
+        this.leftChild = another.leftChild;
+        this.rigthChild = another.rigthChild;
+        this.parent = another.parent;
+        this.level = another.level;
+        //this.route = new ArrayList<>();
+    }
+
+    public BinaryNode() {
+        this.level = -1;
+    }
+
+
+    public BinaryNode<T> addChild(BinaryNode<T> child, BinaryNode<T> p) {
+        child.setParent(p);
+        child.setLevel(p.getLevel() + 1);
+        return child;
+    }
+
+    public void addData(T data) {
+        if ((Double) data <= (Double) this.data) {
+            if (this.leftChild == null) {
+                this.addChild(new BinaryNode<>(data), this.leftChild);
+            } else {
+                this.leftChild.addData(data);
+            }
+        } else {
+            if (this.rigthChild == null) {
+                this.addChild(new BinaryNode<>(data), this.rigthChild);
+            } else {
+                this.rigthChild.addData(data);
+            }
+        }
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public BinaryNode<T> getParent() {
+        return parent;
+    }
+
+    public void setParent(BinaryNode<T> parent) {
+        this.parent = parent;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public BinaryNode<T> getLeftChild() {
+        return leftChild;
+    }
+
+    public void setLeftChild(BinaryNode<T> leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    public BinaryNode<T> getRigthChild() {
+        return rigthChild;
+    }
+
+    public void setRigthChild(BinaryNode<T> rigthChild) {
+        this.rigthChild = rigthChild;
+    }
+
+    public List<BinaryNode<T>> getRoute() {
+        return route;
+    }
+
+    public void setRoute(List<BinaryNode<T>> route) {
+        this.route = route;
+    }
+
+    public BinaryNode<T> search(T data) {
+        BinaryNode<T> r = new BinaryNode<>();
+        if (data.equals(this.getData())){
+            r = this;
+        }else if ((Double) data < (Double) this.getData()){
+            r = this.leftChild.search(data);
+        } else if ((Double) data > (Double) this.getData()){
+            r = this.rigthChild.search(data);
+        }
+        // No se encontrró
+        return r;
+    }
+
+
+    @Override
+    public SearchRoute<T> depthSearch(T data) {
+        return null;
+    }
+
+    @Override
+    public SearchRoute<T> breadthSearch(T data) {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "BinaryNode{" +
+                "data=" + data +
+                ", level=" + level +
+                ", leftChild=" + leftChild +
+                ", rigthChild=" + rigthChild +
+                '}';
+    }
+}

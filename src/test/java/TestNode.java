@@ -79,6 +79,16 @@ public class TestNode {
     }
 
     @Test
+    public void busquedaEnAnchura2() {
+        Node<Integer> raiz = new Node<>(10);
+        raiz.addChild(new Node<>(12)).addChild(new Node<>(13)).addChild(new Node<>(14));
+
+
+        raiz.breadthSearch(14).getRoute().forEach(System.out::println);
+        raiz.breadthSearch(14).getRoute().forEach(integerNode -> System.out.println(integerNode.getData()));
+    }
+
+    @Test
     public void binarios() {
         BinaryTree arbol = new BinaryTree();
 
@@ -125,6 +135,22 @@ public class TestNode {
         System.out.println("------");
         //arbol.getNodeList().forEach(binaryNode -> System.out.println(binaryNode.getValue().toString()));
         arbol.getNodeList().stream().filter(binaryNode -> binaryNode.getLevel().equals(1)).forEach(binaryNode -> System.out.println(binaryNode.getValue()));
+
+    }
+
+    @Test
+    public void testSeachRoute(){
+        Node<Integer> raiz = new Node<>(5);
+        SearchRoute<Integer> ruta = new SearchRoute<>();
+        raiz.addChild(new Node<>(4));
+        raiz.addChild(new Node<>(6));
+        raiz.getNChild(0).addChild(new Node<>(1));
+        raiz.getNChild(0).addChild(new Node<>(2));
+        raiz.getNChild(1).addChild(new Node<>(9));
+        raiz.getNChild(1).addChild(new Node<>(70));
+
+        raiz.breadthSearch(880).getRoute().forEach(System.out::println);
+        Assertions.assertTrue(raiz.breadthSearch(8800).getRoute().isEmpty());
 
     }
 }

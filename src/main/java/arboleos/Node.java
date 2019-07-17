@@ -144,6 +144,9 @@ public class Node<T> implements SearchMethods<T> {
                     for (Integer i = 0; i < level; i++)
                         tabs = String.format("%s\t", tabs)
                     return tabs;
+
+
+
                 }
      */
     //My proudest toString()'s Override
